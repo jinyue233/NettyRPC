@@ -53,8 +53,8 @@ public class MessageSendInitializeTask implements Callable<Boolean> {
                 .option(ChannelOption.SO_KEEPALIVE, true)
                 .remoteAddress(serverAddress);
         b.handler(new MessageSendChannelInitializer().buildRpcSerializeProtocol(protocol));
-
-        ChannelFuture channelFuture = b.connect();
+        // TODO 【Question2】为何这里不用sync?
+        ChannelFuture channelFuture = b.connect()/*.sync()*/;
         channelFuture.addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(final ChannelFuture channelFuture) throws Exception {

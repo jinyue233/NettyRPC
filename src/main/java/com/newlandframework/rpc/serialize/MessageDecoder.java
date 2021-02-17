@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * 其实这个编解码也是基于长度的编解码
  * @author tangjie<https://github.com/tang-jie>
  * @filename:MessageDecoder.java
  * @description:MessageDecoder功能模块
@@ -32,7 +33,7 @@ import java.util.logging.Logger;
  * @since 2016/10/7
  */
 public class MessageDecoder extends ByteToMessageDecoder {
-
+    // 这个长度对应编码的writeInt方法，正好是4个字节
     final public static int MESSAGE_LENGTH = MessageCodecUtil.MESSAGE_LENGTH;
     private MessageCodecUtil util = null;
 

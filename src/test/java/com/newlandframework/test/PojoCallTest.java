@@ -39,7 +39,7 @@ public class PojoCallTest {
 
         int result = manage.save(p);
 
-        manage.query(p);
+        //manage.query(p);
 
         System.out.println("call pojo rpc result:" + result);
 

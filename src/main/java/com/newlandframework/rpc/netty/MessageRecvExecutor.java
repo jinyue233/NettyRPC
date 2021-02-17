@@ -109,6 +109,7 @@ public class MessageRecvExecutor implements ApplicationContextAware {
         Futures.addCallback(listenableFuture, new FutureCallback<Boolean>() {
             @Override
             public void onSuccess(Boolean result) {
+                // response保持了响应结果的引用，这个response已经交给了异步任务去执行，只要异步任务执行完就会执行到onSuccess这个方法
                 ctx.writeAndFlush(response).addListener(new ChannelFutureListener() {
                     @Override
                     public void operationComplete(ChannelFuture channelFuture) throws Exception {
@@ -176,6 +177,8 @@ public class MessageRecvExecutor implements ApplicationContextAware {
                         }
                     }
                 });
+                // TODO 【Question1】 为何这里不用future.channel().closeFuture().sync();
+                // future.channel().closeFuture().sync();
             } else {
                 System.out.printf("[author tangjie] Netty RPC Server start fail!\n");
             }
